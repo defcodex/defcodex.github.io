@@ -7,6 +7,5 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-sitemap
-author: "DefCodex"
+  - jekyll-sitemut
 github_username: "defcodex"
