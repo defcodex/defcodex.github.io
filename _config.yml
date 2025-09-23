@@ -1,11 +1,12 @@
 title: "DefCodex Blog"
 description: "DefCodex Blog shares coding tutorials, tips, and insights for developers."
 url: "https://defcodex.github.io"
-baseurl: "/defcodex"
+ baseurl: ""
 lang: "en"
-theme: jekyll-theme-modernist
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-sitemut
-github_username: "defcodex"
+  - jekyll-sitemap
+author:
+  name: "DefCodex"
