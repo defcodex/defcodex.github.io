@@ -1,5 +1,5 @@
 title: "DefCodex Blog"
-description: "DefCodex Blog shares coding tutorials, tips, and insights for developer."
+description: "DefCodex Blog shares coding tutorials, tips, and insights for developers."
 url: "https://defcodex.github.io"
 baseurl: "/defcodex"
 lang: "en"
@@ -10,4 +10,5 @@ plugins:
   - jekyll-sitemap
 author:
   name: "DefCodex"
-
+  url: "https://defcodex.github.io/defcodex"
+github_username: "defcodex"
