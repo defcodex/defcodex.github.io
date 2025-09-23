@@ -1,0 +1,13 @@
+title: "DefCodex Blog"
+description: "DefCodex Blog shares coding tutorials, tips, and insights for developer."
+url: "https://defcodex.github.io"
+baseurl: "/defcodex"
+lang: "en"
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+author:
+  name: "DefCodex"
+
