@@ -8,7 +8,5 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-author:
-  name: "DefCodex"
-  url: "https://defcodex.github.io/defcodex"
+author: "DefCodex"
 github_username: "defcodex"
