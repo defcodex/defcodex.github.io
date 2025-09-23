@@ -5,7 +5,7 @@ subtitle: "High-quality coding tutorials, programming tips & developer insights"
 ---
 [Home](/) | [Blog](/) | [Tools](/tools/) | [About](/about/) | [Contact](/contact/)
 
-<p <lign="center">
+<p> <lign="center">
   <strong>Welcome to DefCodex Blog!</strong> This is your go ‑ to destination for high ‑ quality coding tutorials, programming tips, software development best practices, and technology news covering Python, JavaScript, Java, Go, and frameworks like React, Django and .NET. Whether you're a beginner or an experienced engineer, you'll find valuable resources to improve your skills and stay ahead in the ever ‑ evolving tech world.
 </p>
 
