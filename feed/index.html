@@ -1,0 +1,58 @@
+---
+layout: default
+title: RSS
+permalink: /feed/
+---
+
+<h1>RSS Feed</h1>
+<p>This page renders a human-friendly view of the site feed. Applications can still subscribe at <code>/feed.xml</code>.</p>
+
+<div id="rss-list">Loading feed…</div>
+
+<script>
+(async function() {
+  try {
+    const resp = await fetch('{{ "/feed.xml" | relative_url }}');
+    const text = await resp.text();
+    const xml = new window.DOMParser().parseFromString(text, "application/xml");
+
+    const updated = xml.querySelector("feed > updated");
+    const entries = Array.from(xml.querySelectorAll("feed > entry"));
+
+    const container = document.getElementById("rss-list");
+    const ul = document.createElement("ul");
+
+    entries.slice(0, 20).forEach(entry => {
+      const title = entry.querySelector("title")?.textContent ?? "Untitled";
+      const link = entry.querySelector('link[rel="alternate"]')?.getAttribute("href")
+                 ?? entry.querySelector("id")?.textContent
+                 ?? "#";
+      const date = entry.querySelector("updated, published")?.textContent ?? "";
+
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = link;
+      a.textContent = title;
+
+      const small = document.createElement("small");
+      if (date) {
+        const d = new Date(date);
+        small.textContent = " — " + d.toLocaleDateString(undefined, {
+          year: "numeric", month: "short", day: "2-digit"
+        });
+      }
+
+      li.appendChild(a);
+      li.appendChild(small);
+      ul.appendChild(li);
+    });
+
+    container.innerHTML = "";
+    container.appendChild(ul);
+  } catch (e) {
+    document.getElementById("rss-list").textContent =
+      "Could not load the feed. Please try again later.";
+    console.error(e);
+  }
+})();
+</script>
