@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Google doğrulama dosyasını indexleme
+Disallow: /googlebfd5846893460ca1.html
+
+# Sitemap konumu
 Sitemap: https://defcodex.github.io/sitemap.xml
