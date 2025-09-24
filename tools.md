@@ -1,9 +1,3 @@
----
-layout: default
-title: Tools
-permalink: /tools/
----
-
 # Tools---
 layout: default
 title: "Tools"
