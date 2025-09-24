@@ -11,8 +11,8 @@ remote_theme: pages-themes/cayman@v0.2.0
 markdown: kramdown
 highlighter: rouge
 
-# Pretty permalinks for posts
-permalink: /:categories/:year/:month/:day/:title/
+# Pretty permalinks for posts (no categories to avoid empty segments)
+permalink: /:year/:month/:day/:title/
 
 # Plugins supported by GitHub Pages
 plugins:
