@@ -7,6 +7,7 @@ subtitle: "High-quality coding tutorials, programming tips & developer insights"
 <p style="text-align:center;">
   <strong>Welcome to DefCodex Blog!</strong>
 </p>
+
 <p>
   This is your go-to destination for high-quality coding tutorials, programming tips,
   software development best practices, and technology news covering Python, JavaScript,
@@ -17,15 +18,29 @@ subtitle: "High-quality coding tutorials, programming tips & developer insights"
 
 ## Latest Posts
 
+{% if site.posts and site.posts.size > 0 %}
 <ul>
-{%- for post in site.posts limit:5 -%}
+  {%- for post in site.posts limit:5 -%}
   <li>
     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     <small> — {{ post.date | date: "%b %d, %Y" }}</small>
   </li>
-{%- endfor -%}
+  {%- endfor -%}
 </ul>
+<p><a href="{{ '/blog/' | relative_url }}">View all posts →</a></p>
+{% else %}
+<p>No posts published yet. Stay tuned!</p>
+{% endif %}
 
 ## About DefCodex
 
-DefCodex is run by passionate developers who love sharing knowledge. Our mission is to provide clear, practical tutorials and insights to help developers of all levels grow.
+<p>
+  DefCodex is run by passionate developers who love sharing knowledge. Our mission is to provide clear, practical
+  tutorials and insights to help developers of all levels grow.
+</p>
+
+<hr />
+
+<p>
+  Prefer RSS? <a href="{{ '/rss/' | relative_url }}">Subscribe to the feed</a>.
+</p>
