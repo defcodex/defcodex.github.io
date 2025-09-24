@@ -5,7 +5,7 @@ description: "Discover essential Visual Studio Code extensions that improve codi
 date: 2025-09-23 10:00:00 +0300
 categories: [productivity, tools]
 tags: [vs_code, extensions, productivity]
-image: /assests/media/71e7ee0a-e2d3-4809-96c7-54a7d7bde223.png
+image: /assets/media/71e7ee0a-e2d3-4809-96c7-54a7d7bde223.png
 ---
 
 Visual Studio Code (VS Code) is one of the most popular editors among developers thanks to its flexibility and extensive extension ecosystem. In this article we’ll explore powerful extensions that can significantly boost your productivity:
@@ -23,4 +23,4 @@ Visual Studio Code (VS Code) is one of the most popular editors among developers
 
 > These extensions can significantly improve your workflow and help you focus on what matters: writing great code.
 
-![Productivity_Image](/assests/media/71e7ee0a-e2d3-4809-96c7-54a7d7bde223.png)
+![Productivity_Image](/assets/media/71e7ee0a-e2d3-4809-96c7-54a7d7bde223.png)
