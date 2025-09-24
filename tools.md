@@ -1,9 +1,9 @@
 ---
-layout: page
-title: "Tools"
+layout: default
+title: Tools
 permalink: /tools/
 ---
 
-## Developer Tools & Resources
+# Tools
 
-Explore recommended tools, extensions and resources to enhance your development workflow. We'll feature code editors, extensions, package managers, deployment tools and other productivity boosters.
+List your tools or resources here.
