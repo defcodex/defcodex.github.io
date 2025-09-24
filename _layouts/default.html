@@ -3,22 +3,25 @@
 <!doctype html>
 <html lang="{{ site.lang | default: 'en' }}">
   <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-  {%- seo -%}
-  <meta name="google-site-verification" content="BnYi8QG6r4gw74jhzry-W7LS5h4nfYFpJWD9aCh8i00">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    {%- seo -%}
+    <meta name="google-site-verification" content="BnYi8QG6r4gw74jhzry-W7LS5h4nfYFpJWD9aCh8i00">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="alternate" type="application/atom+xml" href="{{ '/feed.xml' | relative_url }}">
+  </head>
 
   <body>
     <section class="page-header">
-      <h1 class="project-name"><a href="{{ '/' | relative_url }}" class="no-underline">{{ site.title }}</a></h1>
+      <h1 class="project-name">
+        <a href="{{ '/' | relative_url }}" class="no-underline">{{ site.title }}</a>
+      </h1>
       {%- if site.description -%}
       <h2 class="project-tagline">{{ site.description }}</h2>
       {%- endif -%}
-      <nav class="header-nav">
+      <nav class="header-nav" aria-label="Primary">
         <a class="btn" href="{{ '/' | relative_url }}">Home</a>
         <a class="btn" href="{{ '/blog/' | relative_url }}">Blog</a>
         <a class="btn" href="{{ '/tools/' | relative_url }}">Tools</a>
@@ -29,8 +32,11 @@
 
     <section class="main-content container">
       {{ content }}
+
       <footer class="site-footer">
-        <p>© {{ site.time | date: '%Y' }} {{ site.title }} · <a href="{{ '/feed/' | relative_url }}">RSS</a></p>
+        <p>© {{ site.time | date: '%Y' }} {{ site.title }} ·
+          <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+        </p>
       </footer>
 
       <!-- site-wide total view counter -->
