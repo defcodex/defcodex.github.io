@@ -31,6 +31,26 @@
     <section class="main-content container post">
       <article class="post-article">
         <h1 class="post-title">{{ page.title }}</h1>
+
+        <!-- per-post view counter -->
+        <div class="post-stats" aria-live="polite">
+          <span id="view-count">—</span> views
+        </div>
+        <script>
+          (function() {
+            // Namespace: use your domain (update if you move to a custom domain)
+            const ns = 'defcodex.github.io';
+            // Key per post: use canonical Jekyll URL
+            const key = '{{ page.url }}';
+            const el = document.getElementById('view-count');
+            const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
+            fetch(url)
+              .then(r => r.json())
+              .then(d => { if (el) el.textContent = (d && d.value) ? d.value : 1; })
+              .catch(() => {});
+          })();
+        </script>
+
         <p class="post-meta">
           <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %d, %Y" }}</time>
           {%- if page.categories and page.categories.size > 0 -%}
@@ -45,6 +65,25 @@
       <footer class="site-footer">
         <p>© {{ site.time | date: '%Y' }} {{ site.title }} · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
       </footer>
+
+      <!-- site-wide total view counter (optional) -->
+      <div class="site-stats" aria-live="polite">
+        <span id="site-views">—</span> total views
+      </div>
+      <script>
+        (function() {
+          // Namespace: use your domain (update if you move to a custom domain)
+          const ns = 'defcodex.github.io';
+          // One global key for whole site
+          const key = 'site-total';
+          const el = document.getElementById('site-views');
+          const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
+          fetch(url)
+            .then(r => r.json())
+            .then(d => { if (el) el.textContent = (d && d.value) ? d.value : 1; })
+            .catch(() => {});
+        })();
+      </script>
     </section>
   </body>
 </html>
