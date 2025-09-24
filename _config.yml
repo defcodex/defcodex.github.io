@@ -4,7 +4,12 @@ url: "https://defcodex.github.io"
 baseurl: ""
 lang: "en"
 
+# Use the official Cayman GitHub Pages theme as a base.
 remote_theme: pages-themes/cayman@v0.2.0
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:year/:month/:day/:title/
 
 plugins:
   - jekyll-feed
@@ -13,3 +18,22 @@ plugins:
 
 author:
   name: "DefCodex"
+
+# Ensure posts and pages always have a layout applied even if front matter is missing.
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "DefCodex"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Optional: exclude dev-only files from the build
+exclude:
+  - README.md
+  - node_modules
