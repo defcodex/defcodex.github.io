@@ -1,48 +1,49 @@
 ---
 ---
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  {%- seo -%}
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-      <nav class="nav">
-        <a href="{{ '/' | relative_url }}">Home</a>
-        <a href="{{ '/blog/' | relative_url }}">Blog</a>
-        <a href="{{ '/tools/' | relative_url }}">Tools</a>
-        <a href="{{ '/about/' | relative_url }}">About</a>
-        <a href="{{ '/contact/' | relative_url }}">Contact</a>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    {%- seo -%}
+    <!-- Cayman theme stylesheet -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <!-- Custom overrides -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name"><a href="{{ '/' | relative_url }}" class="no-underline">{{ site.title }}</a></h1>
+      {%- if site.description -%}
+      <h2 class="project-tagline">{{ site.description }}</h2>
+      {%- endif -%}
+      <nav class="header-nav">
+        <a class="btn" href="{{ '/' | relative_url }}">Home</a>
+        <a class="btn" href="{{ '/blog/' | relative_url }}">Blog</a>
+        <a class="btn" href="{{ '/tools/' | relative_url }}">Tools</a>
+        <a class="btn" href="{{ '/about/' | relative_url }}">About</a>
+        <a class="btn" href="{{ '/contact/' | relative_url }}">Contact</a>
       </nav>
-    </div>
-  </header>
+    </section>
 
-  <main class="container post">
-    <article>
-      <h1 class="post-title">{{ page.title }}</h1>
-      <p class="post-meta">
-        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %d, %Y" }}</time>
-        {%- if page.categories and page.categories.size > 0 -%}
-        · {{ page.categories | join: ", " }}
-        {%- endif -%}
-      </p>
-      <div class="post-content">
-        {{ content }}
-      </div>
-    </article>
-  </main>
+    <section class="main-content container post">
+      <article class="post-article">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <p class="post-meta">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %d, %Y" }}</time>
+          {%- if page.categories and page.categories.size > 0 -%}
+           · {{ page.categories | join: ", " }}
+          {%- endif -%}
+        </p>
+        <div class="post-content">
+          {{ content }}
+        </div>
+      </article>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© {{ site.time | date: '%Y' }} {{ site.title }} — Powered by <a href="https://pages.github.com/">GitHub Pages</a></p>
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-    </div>
-  </footer>
-</body>
+      <footer class="site-footer">
+        <p>© {{ site.time | date: '%Y' }} {{ site.title }} · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
+      </footer>
+    </section>
+  </body>
 </html>
