@@ -3,23 +3,31 @@ description: "DefCodex Blog shares coding tutorials, tips and insights for devel
 url: "https://defcodex.github.io"
 baseurl: ""
 lang: "en"
+timezone: "America/New_York"
 
 # Use the official Cayman GitHub Pages theme as a base.
 remote_theme: pages-themes/cayman@v0.2.0
 
 markdown: kramdown
 highlighter: rouge
+
+# Pretty permalinks for posts
 permalink: /:categories/:year/:month/:day/:title/
 
+# Plugins supported by GitHub Pages
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# Feed options (keeps default path /feed.xml)
+feed:
+  path: feed.xml
+
 author:
   name: "DefCodex"
 
-# Ensure posts and pages always have a layout applied even if front matter is missing.
+# Ensure layouts are applied even when a page/post forgets front matter values
 defaults:
   - scope:
       path: ""
@@ -33,7 +41,9 @@ defaults:
     values:
       layout: "default"
 
-# Optional: exclude dev-only files from the build
+# Exclude dev-only files from the site output
 exclude:
   - README.md
   - node_modules
+  - Gemfile
+  - Gemfile.lock
