@@ -1,42 +1,68 @@
 ---
 layout: default
 title: RSS
-permalink: /feed/
+permalink: /rss/
 ---
 
 <h1>RSS Feed</h1>
-<p>This page renders a human-friendly view of the site feed. Applications can still subscribe at <code>/feed.xml</code>.</p>
+<p>
+  This page renders a human-friendly view of the site feed.
+  Applications can still subscribe at <code>/feed.xml</code>.
+</p>
 
+<div id="rss-updated" class="post-meta" aria-live="polite"></div>
 <div id="rss-list">Loading feed…</div>
 
 <script>
 (async function() {
+  const FEED_URL = '{{ "/feed.xml" | relative_url }}';
+  const $updated = document.getElementById("rss-updated");
+  const $container = document.getElementById("rss-list");
+
   try {
-    const resp = await fetch('{{ "/feed.xml" | relative_url }}');
+    const resp = await fetch(FEED_URL, { headers: { "Accept": "application/atom+xml" } });
     const text = await resp.text();
     const xml = new window.DOMParser().parseFromString(text, "application/xml");
 
-    const updated = xml.querySelector("feed > updated");
+    // error check
+    if (xml.querySelector("parsererror")) {
+      throw new Error("Invalid XML");
+    }
+
+    const updatedEl = xml.querySelector("feed > updated");
+    if (updatedEl && $updated) {
+      const d = new Date(updatedEl.textContent);
+      $updated.textContent = "Last updated: " + d.toLocaleString(undefined, {
+        year: "numeric", month: "short", day: "2-digit",
+        hour: "2-digit", minute: "2-digit"
+      });
+    }
+
     const entries = Array.from(xml.querySelectorAll("feed > entry"));
+    if (!entries.length) {
+      $container.textContent = "No items yet.";
+      return;
+    }
 
-    const container = document.getElementById("rss-list");
     const ul = document.createElement("ul");
-
     entries.slice(0, 20).forEach(entry => {
-      const title = entry.querySelector("title")?.textContent ?? "Untitled";
-      const link = entry.querySelector('link[rel="alternate"]')?.getAttribute("href")
-                 ?? entry.querySelector("id")?.textContent
-                 ?? "#";
-      const date = entry.querySelector("updated, published")?.textContent ?? "";
+      const title = entry.querySelector("title")?.textContent?.trim() || "Untitled";
+      const link =
+        entry.querySelector('link[rel="alternate"]')?.getAttribute("href") ||
+        entry.querySelector("id")?.textContent ||
+        "#";
+      const dateEl = entry.querySelector("updated") || entry.querySelector("published");
+      const dateText = dateEl ? dateEl.textContent : "";
 
       const li = document.createElement("li");
+
       const a = document.createElement("a");
       a.href = link;
       a.textContent = title;
 
       const small = document.createElement("small");
-      if (date) {
-        const d = new Date(date);
+      if (dateText) {
+        const d = new Date(dateText);
         small.textContent = " — " + d.toLocaleDateString(undefined, {
           year: "numeric", month: "short", day: "2-digit"
         });
@@ -47,12 +73,11 @@ permalink: /feed/
       ul.appendChild(li);
     });
 
-    container.innerHTML = "";
-    container.appendChild(ul);
+    $container.innerHTML = "";
+    $container.appendChild(ul);
   } catch (e) {
-    document.getElementById("rss-list").textContent =
-      "Could not load the feed. Please try again later.";
     console.error(e);
+    $container.textContent = "Could not load the feed. Please try again later.";
   }
 })();
 </script>
