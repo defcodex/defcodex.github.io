@@ -1,9 +1,9 @@
 ---
-layout: page
-title: "Contact"
+layout: default
+title: Contact
 permalink: /contact/
 ---
 
-## Contact Us
+# Contact
 
-We'd love to hear from you! Feel free to reach out via email at example@example.com for feedback, questions or collaboration requests.
+Provide contact details or links here.
