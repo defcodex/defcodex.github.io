@@ -47,3 +47,8 @@ exclude:
   - node_modules
   - Gemfile
   - Gemfile.lock
+
+# Counter settings (used by CountAPI in templates)
+counter:
+  namespace: "defcodex.github.io"   # change here if you move to a custom domain
+  site_total_key: "site-total"
