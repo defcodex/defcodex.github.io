@@ -49,7 +49,7 @@
             const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
             fetch(url)
               .then(r => r.json())
-              .then(d => { if (el) el.textContent = (d && d.value) ? d.value : 1; })
+              .then(d => { if (el) el.textContent = (d && d.value) ? new Intl.NumberFormat().format(d.value) : '1'; })
               .catch(() => {});
           })();
         </script>
@@ -86,7 +86,7 @@
           const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
           fetch(url)
             .then(r => r.json())
-            .then(d => { if (el) el.textContent = (d && d.value) ? d.value : 1; })
+            .then(d => { if (el) el.textContent = (d && d.value) ? new Intl.NumberFormat().format(d.value) : '1'; })
             .catch(() => {});
         })();
       </script>
