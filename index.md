@@ -23,6 +23,37 @@ subtitle: "High-quality coding tutorials, programming tips & developer insights"
   .posts-list small { color:var(--muted, #6b7280); }
 </style>
 
+<!-- Universal view counter helper with fallback: CountAPI -> hits.sh -->
+<script>
+  // Expose a single helper to fetch counters with graceful fallback.
+  window.fetchCounter = async function ({ namespace, key }) {
+    const fmt = (n) => new Intl.NumberFormat().format(n);
+
+    // Provider 1: CountAPI
+    try {
+      const url1 = `https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`;
+      const r1 = await fetch(url1, { cache: 'no-store' });
+      if (r1.ok) {
+        const d1 = await r1.json();
+        if (typeof d1?.value === 'number') return fmt(d1.value);
+      }
+    } catch (_) { /* ignore */ }
+
+    // Provider 2: hits.sh (returns { hits: N })
+    try {
+      const path = `${namespace}/${(key || 'home').replace(/^\/+/, '')}`.replace(/\/+$/, '');
+      const url2 = `https://hits.sh/${encodeURIComponent(path)}.json?secure=1`;
+      const r2 = await fetch(url2, { cache: 'no-store' });
+      if (r2.ok) {
+        const d2 = await r2.json();
+        if (typeof d2?.hits === 'number') return fmt(d2.hits);
+      }
+    } catch (_) { /* ignore */ }
+
+    return '—'; // if all fail
+  };
+</script>
+
 <p style="text-align:center;">
   <strong>Welcome to DefCodex Blog!</strong>
 </p>
@@ -87,9 +118,8 @@ subtitle: "High-quality coding tutorials, programming tips & developer insights"
 <!-- Counters script (home + per-post list) -->
 <script>
   (function () {
-    // Namespace: use your domain (update if you move to a custom domain)
-    const ns  = 'defcodex.github.io';
-    const fmt = (n) => new Intl.NumberFormat().format(n);
+    // Namespace from _config.yml (fallback to default if missing)
+    const ns  = '{{ site.counter.namespace | default: "defcodex.github.io" }}';
 
     // Normalize Jekyll URLs to avoid duplicate keys (strip trailing slash; root -> 'home')
     const normalize = (p) => {
@@ -101,11 +131,8 @@ subtitle: "High-quality coding tutorials, programming tips & developer insights"
     (function homeCounter() {
       const el  = document.getElementById('home-views');
       const key = 'home';
-      const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
-      fetch(url, { cache: 'no-store' })
-        .then(r => r.json())
-        .then(d => { if (el && typeof d?.value === 'number') el.textContent = fmt(d.value); })
-        .catch(() => { /* silent */ });
+      window.fetchCounter({ namespace: ns, key })
+        .then(val => { if (el) el.textContent = val; });
     })();
 
     // 2) Per-post counters shown in the latest list
@@ -116,12 +143,9 @@ subtitle: "High-quality coding tutorials, programming tips & developer insights"
       pills.forEach(pill => {
         const key = normalize(pill.getAttribute('data-key'));
         const strong = pill.querySelector('strong');
-        const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
 
-        fetch(url, { cache: 'no-store' })
-          .then(r => r.json())
-          .then(d => { if (strong && typeof d?.value === 'number') strong.textContent = fmt(d.value); })
-          .catch(() => { /* silent */ });
+        window.fetchCounter({ namespace: ns, key })
+          .then(val => { if (strong) strong.textContent = val; });
       });
     })();
   })();
