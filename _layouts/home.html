@@ -7,14 +7,68 @@ layout: default
 {{ content }}
 
 {% if site.posts.size > 0 %}
+  <style>
+    /* Modern counter badge */
+    .counter-pill {
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.2rem .5rem; border:1px solid var(--border-color, #e5e7eb);
+      border-radius:999px; background:var(--pill-bg, rgba(0,0,0,.04));
+      font-size:.8125rem; line-height:1.25rem; margin-left:.5rem;
+    }
+    .counter-pill svg { width:.95rem; height:.95rem; opacity:.75; flex:0 0 auto; }
+    .posts-list { list-style:none; padding-left:0; }
+    .posts-list li { margin:.5rem 0; display:flex; align-items:center; gap:.5rem; }
+    .posts-list time { color:var(--muted, #6b7280); font-size:.9rem; margin-right:.5rem; white-space:nowrap; }
+    @media (prefers-color-scheme: dark) {
+      .counter-pill { border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+    }
+  </style>
+
   <h2>Posts</h2>
-  <ul>
+  <ul class="posts-list">
     {% for post in site.posts %}
     <li>
-      <span>{{ post.date | date: "%b %d, %Y" }}</span>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d, %Y" }}</time>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <!-- per-post view badge -->
+      <span class="counter-pill" data-key="{{ post.url }}" title="Views" aria-live="polite">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M1.5 12s3.5-7.5 10.5-7.5S22.5 12 22.5 12s-3.5 7.5-10.5 7.5S1.5 12 1.5 12Z" stroke="currentColor"/>
+          <circle cx="12" cy="12" r="3.5" stroke="currentColor" />
+        </svg>
+        <strong>—</strong>
+      </span>
     </li>
     {% endfor %}
   </ul>
   <p><a href="{{ '/rss/' | relative_url }}">Subscribe via RSS</a></p>
+
+  <script>
+    (function () {
+      // Namespace: use your domain (update if you move to a custom domain)
+      const ns  = 'defcodex.github.io';
+      const fmt = (n) => new Intl.NumberFormat().format(n);
+
+      // Normalize Jekyll URLs to avoid duplicate keys (strip trailing slash; home -> 'home')
+      const normalize = (p) => {
+        const s = (p || '/').replace(/\/+$/, '');
+        return s === '' ? 'home' : s;
+      };
+
+      const pills = document.querySelectorAll('.counter-pill[data-key]');
+      if (!pills.length) return;
+
+      // Fetch counters in parallel
+      pills.forEach(pill => {
+        const key = normalize(pill.getAttribute('data-key'));
+        const strong = pill.querySelector('strong');
+        const url = `https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`;
+
+        fetch(url, { cache: 'no-store' })
+          .then(r => r.json())
+          .then(d => { if (strong && typeof d?.value === 'number') strong.textContent = fmt(d.value); })
+          .catch(() => { /* silent */ });
+      });
+    })();
+  </script>
 {% endif %}
