@@ -27,34 +27,36 @@
       }
     </style>
 
-    <!-- Universal view counter helper with fallback: CountAPI -> hits.sh -->
+    <!-- hits.sh-only counter helper (increments via SVG beacon, then reads JSON) -->
     <script>
-      // Expose a single helper to fetch counters with graceful fallback.
       window.fetchCounter = async function ({ namespace, key }) {
         const fmt = (n) => new Intl.NumberFormat().format(n);
 
-        // Provider 1: CountAPI
-        try {
-          const url1 = `https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`;
-          const r1 = await fetch(url1, { cache: 'no-store' });
-          if (r1.ok) {
-            const d1 = await r1.json();
-            if (typeof d1?.value === 'number') return fmt(d1.value);
-          }
-        } catch (_) { /* ignore */ }
+        // Normalize key: trim leading/trailing slashes; root -> 'home'
+        const normKey = (key || 'home').replace(/^\/+|\/+$/g, '') || 'home';
 
-        // Provider 2: hits.sh (returns { hits: N })
-        try {
-          const path = `${namespace}/${(key || 'home').replace(/^\/+/, '')}`.replace(/\/+$/, '');
-          const url2 = `https://hits.sh/${encodeURIComponent(path)}.json?secure=1`;
-          const r2 = await fetch(url2, { cache: 'no-store' });
-          if (r2.ok) {
-            const d2 = await r2.json();
-            if (typeof d2?.hits === 'number') return fmt(d2.hits);
-          }
-        } catch (_) { /* ignore */ }
+        // Build hits.sh path safely: encode each segment, keep slashes between
+        const segments = normKey.split('/').filter(Boolean);
+        const path = [namespace, ...segments].map(encodeURIComponent).join('/');
 
-        return '—'; // if all fail
+        // 1) increment via invisible SVG beacon
+        try {
+          const img = new Image();
+          img.referrerPolicy = 'no-referrer';
+          img.decoding = 'async';
+          img.src = `https://hits.sh/${path}.svg?style=flat&label=hits&_=${Date.now()}`;
+        } catch (_) {}
+
+        // 2) read value via JSON
+        try {
+          const r = await fetch(`https://hits.sh/${path}.json?secure=1&_=${Date.now()}`, { cache: 'no-store' });
+          if (r.ok) {
+            const d = await r.json();
+            if (typeof d?.hits === 'number') return fmt(d.hits);
+          }
+        } catch (_) {}
+
+        return '—';
       };
     </script>
   </head>
@@ -98,7 +100,7 @@
       </div>
     </section>
 
-    <!-- Site-wide total counter init -->
+    <!-- Site-wide total counter init (hits.sh only) -->
     <script>
       (function () {
         const ns  = '{{ site.counter.namespace | default: "defcodex.github.io" }}';
