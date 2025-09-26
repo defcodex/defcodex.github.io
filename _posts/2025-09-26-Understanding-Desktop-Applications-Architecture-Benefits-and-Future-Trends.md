@@ -8,7 +8,7 @@ tags: [desktop applications, software architecture, app development, future of a
 
 # Understanding Desktop Applications: Architecture, Benefits, and Future Trends
 
-![Professional desktop computer illustration with modern UI interface.](/media/desktop-application-hero-image.jpg)
+![Professional desktop computer illustration with modern UI interface.](/media/desktop-application-hero-image.png)
 
 Desktop applications remain a cornerstone of software development, powering tools from complex engineering suites to everyday productivity software.  
 Despite the rise of web and mobile apps, desktop software offers unmatched performance, robust security, and direct access to hardware resources.  
@@ -34,7 +34,7 @@ Unlike web applications that rely on a browser, desktop apps interact directly w
 
 Understanding how desktop applications are built helps highlight why they remain powerful and flexible.
 
-![Infographic showing desktop application architecture layers.](/media/desktop-application-architecture-diagram.jpg)
+![Infographic showing desktop application architecture layers.](/media/desktop-application-architecture-diagram.png)
 
 **Typical Architecture Layers:**
 1. **Presentation Layer:** The user interface (UI) — buttons, menus, forms, and visual elements  
@@ -50,7 +50,7 @@ Understanding how desktop applications are built helps highlight why they remain
 
 Modern frameworks make it easier to build feature-rich desktop applications:
 
-![Logos of popular desktop application frameworks.](/media/desktop-application-frameworks.jpg)
+![Logos of popular desktop application frameworks.](/media/desktop-application-frameworks.png)
 
 - **Electron.js:** Cross-platform apps using JavaScript, HTML, and CSS  
 - **.NET (WPF/WinForms):** Ideal for Windows desktop apps with advanced UI controls  
@@ -76,7 +76,7 @@ Desktop apps continue to excel in various domains due to their unique benefits:
 
 While all three types serve users, their strengths differ:
 
-![Infographic comparing desktop, web, and mobile app performance.](/media/desktop-vs-web-vs-mobile-performance.jpg)
+![Infographic comparing desktop, web, and mobile app performance.](/media/desktop-vs-web-vs-mobile-performance.png)
 
 | Feature                  | Desktop Apps         | Web Apps               | Mobile Apps           |
 |--------------------------|---------------------|-----------------------|----------------------|
@@ -92,7 +92,7 @@ While all three types serve users, their strengths differ:
 
 Desktop software is evolving alongside new technologies:
 
-![Futuristic concept of AI-powered and cloud-integrated desktop apps.](/media/future-desktop-applications-trends.jpg)
+![Futuristic concept of AI-powered and cloud-integrated desktop apps.](/media/future-desktop-applications-trends.png)
 
 - **Hybrid Apps:** Combining web technologies with native performance  
 - **Cloud Integration:** Seamless syncing and remote storage  
