@@ -8,8 +8,6 @@ image: /assets/media/hero-image-seo-impact-1920x1080.jpg
 permalink: /blog/image-seo-for-ecommerce/
 ---
 
-![Abstract purple–blue gradient background representing the image SEO theme.](/assets/media/hero-image-seo-impact-1920x1080.jpg)
-
 **Great products deserve to be found.** On an e-commerce page, images do more than decorate—they carry meaning about color, materials, variants, texture, and scale. When those assets are opaque to machines (think `IMG_1234.jpg`), search systems have to guess. **Image SEO removes guesswork**, turning every file into a clear signal that supports both discovery and conversion.
 
 ## The quiet power of a filename
