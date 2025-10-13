@@ -4,11 +4,11 @@ description: "Why filenames, alt text, sizing, and delivery shape discoverabilit
 date: 2025-10-13
 author: "DefCodex"
 tags: ["image seo","product images","filenames","alt text","resizing","performance","ecommerce seo","automation"]
-image: /assets/media/hero-image-seo-impact-1920x1080.png
+image: /assets/media/hero-image-seo-impact-1920x1080.jpg
 permalink: /blog/image-seo-for-ecommerce/
 ---
 
-![Abstract hero showing organized image grid and crop marks — image SEO theme.](/assets/media/hero-image-seo-impact-1920x1080.png)
+![Abstract purple–blue gradient background representing the image SEO theme.](/assets/media/hero-image-seo-impact-1920x1080.jpg)
 
 **Great products deserve to be found.** On an e-commerce page, images do more than decorate—they carry meaning about color, materials, variants, texture, and scale. When those assets are opaque to machines (think `IMG_1234.jpg`), search systems have to guess. **Image SEO removes guesswork**, turning every file into a clear signal that supports both discovery and conversion.
 
@@ -18,7 +18,7 @@ A filename is the first label a crawler encounters. If it’s **clean, hyphenate
 
 Replace raw camera dumps with descriptive patterns and the difference is more than cosmetic. You improve **crawlability, query matching, and internal search hygiene**—which, in practice, leads to better indexing and steadier long-tail traffic.
 
-![Abstract “before/after” comparison: messy token blobs versus clean, aligned hyphen chips.](/assets/media/before-after-filename-seo.png)
+![Abstract optimization concept comparing messy vs. clean naming approaches (before/after).](/assets/media/before-after-filename-seo.png)
 
 ## Alt text that adds context (not noise)
 
@@ -28,7 +28,7 @@ Alt text isn’t a bucket for keywords—it’s a concise description that helps
 
 Oversized assets punish both users and metrics. Serve **right-sized images** (predictable long edge and aspect ratio), choose an appropriate **format** (JPG or WebP are safe defaults), and apply **controlled compression** instead of chasing the smallest possible file at any cost. The payoff is visible in Core Web Vitals, bounce rate, and ultimately **revenue**. The ideal image is not only beautiful; it’s **appropriately sized** and delivered efficiently.
 
-![Abstract process illustration: select images, rename with hyphen tokens, resize with crop guides, export to organized folder.](/assets/media/flow-image-seo-rename-resize.png)
+![Text-free process illustration: selecting images, renaming with hyphen-like tokens, resizing with crop guides, and exporting.](/assets/media/flow-image-seo-rename-resize.png)
 
 ## A repeatable workflow you can actually maintain
 
@@ -45,7 +45,7 @@ Three patterns show up again and again.
 
 The fix is discipline: **clarity, consistency, and restraint**.
 
-![Icon-only checklist: filename tokens, alt tag, crop frame, compression dial, sitemap nodes, CDN cache.](/assets/media/checklist-image-optimization.png)
+![Icon-only checklist covering filenames, alt text, resizing, compression, sitemaps, and CDN caching.](/assets/media/checklist-image-optimization.png)
 
 ## Governance for scale
 
